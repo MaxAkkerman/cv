@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Багироков Анзор Хазретович — Senior Fullstack Engineer</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: #f8f9fa;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 50px 60px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border-radius: 8px;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 24px;
+            margin-bottom: 30px;
+            padding-bottom: 25px;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .header-main {
+            display: flex;
+            align-items: flex-start;
+            gap: 22px;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .header-photo {
+            flex-shrink: 0;
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid #e2e8f0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            background: #1a1a2e;
+        }
+
+        .header-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* Кадрирование full-body → голова и плечи */
+            object-position: 55% 12%;
+            display: block;
+        }
+
+        .header-left h1 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1a1a2e;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .header-left .title {
+            font-size: 18px;
+            color: #4a5568;
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+
+        .header-left .location {
+            font-size: 14px;
+            color: #718096;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .header-left .location span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .header-right {
+            text-align: right;
+            flex-shrink: 0;
+        }
+
+        .header-right .salary {
+            font-size: 24px;
+            font-weight: 700;
+            color: #2d6a4f;
+            margin-bottom: 8px;
+        }
+
+        .header-right .contacts {
+            font-size: 13px;
+            color: #4a5568;
+            line-height: 1.8;
+        }
+
+        .header-right .contacts a {
+            color: #2b6cb0;
+            text-decoration: none;
+        }
+
+        .header-right .contacts a:hover {
+            text-decoration: underline;
+        }
+
+        /* Executive Summary */
+        .summary {
+            background: #f0f4f8;
+            padding: 20px 25px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border-left: 4px solid #2b6cb0;
+        }
+
+        .summary p {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #2d3748;
+        }
+
+        .summary strong {
+            color: #1a202c;
+        }
+
+        /* Section headers */
+        .section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1a1a2e;
+            margin-bottom: 18px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e9ecef;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 20px;
+            background: #2b6cb0;
+            border-radius: 2px;
+        }
+
+        /* Experience items */
+        .exp-item {
+            margin-bottom: 28px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #edf2f7;
+        }
+
+        .exp-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .exp-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+
+        .exp-company {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1a202c;
+        }
+
+        .exp-company a {
+            color: #2b6cb0;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 400;
+            margin-left: 8px;
+        }
+
+        .exp-period {
+            font-size: 13px;
+            color: #718096;
+            font-weight: 500;
+            white-space: nowrap;
+            margin-left: 15px;
+        }
+
+        .exp-role {
+            font-size: 15px;
+            font-weight: 600;
+            color: #4a5568;
+            margin-bottom: 10px;
+        }
+
+        .exp-desc {
+            font-size: 14px;
+            color: #4a5568;
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+
+        .exp-achievements {
+            list-style: none;
+            padding: 0;
+        }
+
+        .exp-achievements li {
+            font-size: 14px;
+            color: #2d3748;
+            padding: 5px 0 5px 20px;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .exp-achievements li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: #2b6cb0;
+            font-weight: bold;
+        }
+
+        .exp-meta {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        .exp-meta span {
+            font-size: 12px;
+            color: #718096;
+            background: #f7fafc;
+            padding: 3px 10px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Skills */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 140px 1fr;
+            gap: 12px 20px;
+            font-size: 14px;
+        }
+
+        .skill-category {
+            font-weight: 600;
+            color: #4a5568;
+            text-align: right;
+            padding-top: 2px;
+        }
+
+        .skill-list {
+            color: #2d3748;
+            line-height: 1.6;
+        }
+
+        .skill-tag {
+            display: inline-block;
+            background: #edf2f7;
+            padding: 2px 10px;
+            border-radius: 12px;
+            margin: 2px 4px 2px 0;
+            font-size: 13px;
+            color: #2d3748;
+        }
+
+        /* Education & Teaching */
+        .edu-item {
+            margin-bottom: 15px;
+        }
+
+        .edu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+
+        .edu-school {
+            font-weight: 600;
+            color: #1a202c;
+            font-size: 15px;
+        }
+
+        .edu-year {
+            font-size: 13px;
+            color: #718096;
+        }
+
+        .edu-detail {
+            font-size: 14px;
+            color: #4a5568;
+            margin-top: 3px;
+        }
+
+        /* Teaching block */
+        .teaching-block {
+            background: #fffaf0;
+            padding: 18px 22px;
+            border-radius: 8px;
+            border-left: 4px solid #dd6b20;
+            margin-bottom: 20px;
+        }
+
+        .teaching-block h4 {
+            font-size: 15px;
+            font-weight: 700;
+            color: #c05621;
+            margin-bottom: 8px;
+        }
+
+        .teaching-block p {
+            font-size: 14px;
+            color: #4a5568;
+            line-height: 1.6;
+        }
+
+        /* About */
+        .about-text {
+            font-size: 14px;
+            color: #4a5568;
+            line-height: 1.8;
+        }
+
+        .about-text p {
+            margin-bottom: 10px;
+        }
+
+        /* Languages */
+        .lang-item {
+            display: flex;
+            gap: 15px;
+            font-size: 14px;
+            margin-bottom: 6px;
+        }
+
+        .lang-name {
+            font-weight: 600;
+            color: #2d3748;
+            min-width: 100px;
+        }
+
+        .lang-level {
+            color: #718096;
+        }
+
+        /* Footer info */
+        .footer-info {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #e9ecef;
+            font-size: 13px;
+            color: #718096;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-info span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        @media (max-width: 700px) {
+            .container { padding: 30px 24px; }
+            .header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .header-right { text-align: left; }
+            .header-left h1 { font-size: 26px; }
+            .header-photo { width: 88px; height: 88px; }
+        }
+
+        @media print {
+            body { background: #fff; padding: 0; }
+            .container { box-shadow: none; padding: 30px 40px; }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <div class="container">
+
+        <!-- HEADER -->
+        <div class="header">
+            <div class="header-main">
+                <div class="header-photo">
+                    <img src="assets/photo.jpeg" alt="Багироков Анзор Хазретович">
+                </div>
+                <div class="header-left">
+                    <h1>Багироков Анзор Хазретович</h1>
+                    <div class="title">Senior Fullstack Engineer</div>
+                    <div class="location">
+                        <span>📍 Майкоп, Россия</span>
+                        <span>✅ Разрешение на работу: РФ</span>
+                        <span>🎂 36 лет</span>
+                    </div>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="contacts">
+                    <div>📱 +7 (918) 922-01-95</div>
+                    <div>📧 <a href="mailto:bagirokovanzor01@mail.ru">bagirokovanzor01@mail.ru</a></div>
+                    <div>🐙 <a href="https://github.com/MaxAkkerman">github.com/MaxAkkerman</a></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- EXECUTIVE SUMMARY -->
+        <div class="summary">
+            <p>
+                <strong>Senior Fullstack Engineer с 7+ годами опыта</strong> в разработке высоконагруженных
+                веб-приложений, DeFi-платформ и low-code инструментов. Специализация: архитектура
+                frontend-систем (React, TypeScript), блокчейн-интеграции (Solidity, Web3),
+                микросервисная backend-разработка (Node.js, NestJS). <strong>2 года преподавания</strong>
+                в Otus (React Advanced, Node.js Professional). Практикую DDD, FSD, System Design.
+                Ищу позицию с возможностью влиять на архитектуру продукта.
+            </p>
+        </div>
+
+        <!-- EXPERIENCE -->
+        <div class="section">
+            <h2 class="section-title">Опыт работы — 7 лет 6 месяцев</h2>
+
+            <!-- SberTech -->
+            <div class="exp-item">
+                <div class="exp-header">
+                    <div class="exp-company">
+                        SberTech
+                        <a href="https://sbertech.ru">sbertech.ru</a>
+                    </div>
+                    <div class="exp-period">Июнь 2025 — настоящее время (1 г. 2 мес.)</div>
+                </div>
+                <div class="exp-role">Lead / Senior Fullstack Developer</div>
+                <div class="exp-desc">
+                    Разработка инструментов автоматизации бизнес-процессов и low-code платформы
+                    для генерации готовых макетов форм в крупнейшем ИТ-консалтинге Сбера.
+                </div>
+                <ul class="exp-achievements">
+                    <li><strong>Дизайн-система:</strong> Спроектировал и внедрил библиотеку из 40+
+                    переиспользуемых компонентов. Стандартизировал UI 3 продуктовых команд,
+                    сократив время разработки новых форм с 3 дней до 4 часов.</li>
+                    <li><strong>Low-code платформа:</strong> Разработал визуальный конструктор
+                    с drag-and-drop интерфейсом. Пользователи без навыков программирования создают
+                    production-ready формы за 30 минут вместо 2 недель разработки.</li>
+                    <li><strong>Микросервисная архитектура:</strong> Декомпозировал монорепозиторий
+                    на 5 независимых микросервисов. Время сборки сократилось с 45 до 8 минут,
+                    частота релизов выросла на 60%.</li>
+                </ul>
+                <div class="exp-meta">
+                    <span>React</span>
+                    <span>TypeScript</span>
+                    <span>NestJS</span>
+                    <span>Low-code</span>
+                    <span>Микросервисы</span>
+                </div>
+            </div>
+
+            <!-- USETECH -->
+            <div class="exp-item">
+                <div class="exp-header">
+                    <div class="exp-company">
+                        USETECH
+                        <a href="https://www.usetech.ru">www.usetech.ru</a>
+                    </div>
+                    <div class="exp-period">Сентябрь 2023 — Июнь 2025 (1 г. 10 мес.)</div>
+                </div>
+                <div class="exp-role">Senior Frontend Engineer</div>
+                <div class="exp-desc">
+                    Разработка enterprise-приложений: микросервисная платформа, low-code конструктор
+                    форм, дизайнер отчётов (аналог Jasper Reports) для крупных заказчиков.
+                </div>
+                <ul class="exp-achievements">
+                    <li><strong>Микросервисный переход:</strong> Разделил монолитный frontend на
+                    4 независимых микрофронтенда. Внедрил Module Federation, устранил 15+
+                    циклических зависимостей. Время загрузки приложения сократилось на 40%.</li>
+                    <li><strong>Low-code редактор форм:</strong> Создал визуальный конструктор
+                    с 25+ типами полей ввода, валидацией, условной логикой. Заказчик сократил
+                    сроки запуска клиентских форм с 2 недель до 2 дней.</li>
+                    <li><strong>Дизайнер отчётов:</strong> Разработал аналог Jasper Reports с
+                    поддержкой таблиц, изображений, QR-кодов, шаблонов. Интеграция с 3 СУБД,
+                    экспорт в PDF/Excel.</li>
+                    <li><strong>Тестирование:</strong> Покрыл критичные математические расчёты
+                    unit-тестами (Jest), устранив 15+ потенциальных багов до выхода в production.</li>
+                </ul>
+                <div class="exp-meta">
+                    <span>React</span>
+                    <span>TypeScript</span>
+                    <span>Jest</span>
+                    <span>Konva</span>
+                    <span>RND</span>
+                    <span>Micro-frontends</span>
+                </div>
+            </div>
+
+            <!-- Marsbase -->
+            <div class="exp-item">
+                <div class="exp-header">
+                    <div class="exp-company">
+                        Marsbase
+                        <a href="https://otcmarsbase.io">otcmarsbase.io</a>
+                    </div>
+                    <div class="exp-period">Июль 2023 — Сентябрь 2023 (3 мес.)</div>
+                </div>
+                <div class="exp-role">Frontend Engineer</div>
+                <div class="exp-desc">
+                    Разработка DeFi-платформы для OTC-сделок с криптовалютой: создание офферов,
+                    управление сделками, интеграция с MetaMask.
+                </div>
+                <ul class="exp-achievements">
+                    <li><strong>Многошаговые формы:</strong> Реализовал сложный wizard-сценарий
+                    создания оффера с 8 шагами, валидацией на каждом этапе, автоматическими
+                    расчётами комиссий через DecimalJS.</li>
+                    <li><strong>Система фильтров:</strong> Создал универсальный хук useFiltersControl
+                    для синхронизации состояния формы, URL-параметров и API-запросов.
+                    Переиспользован в 6 разделах приложения.</li>
+                    <li><strong>Web3-интеграция:</strong> Разработал 8 кастомных хуков для
+                    взаимодействия с EVM-совместимыми кошельками, обработки транзакций
+                    и отслеживания статусов в реальном времени.</li>
+                </ul>
+                <div class="exp-meta">
+                    <span>React</span>
+                    <span>TypeScript</span>
+                    <span>MobX</span>
+                    <span>Web3</span>
+                    <span>Chakra UI</span>
+                    <span>DecimalJS</span>
+                </div>
+            </div>
+
+            <!-- Allnodes -->
+            <div class="exp-item">
+                <div class="exp-header">
+                    <div class="exp-company">
+                        Allnodes.com
+                        <a href="https://allnodes.com">allnodes.com</a>
+                    </div>
+                    <div class="exp-period">Сентябрь 2022 — Июнь 2023 (10 мес.)</div>
+                </div>
+                <div class="exp-role">Fullstack Engineer</div>
+                <div class="exp-desc">
+                    Разработка платформы для хостинга 25 000+ нод-валидаторов в 50+ блокчейнах
+                    (Ethereum, Solana, Polkadot, Cardano, Near). Обработка $500M+ в стейкинг-операциях.
+                </div>
+                <ul class="exp-achievements">
+                    <li><strong>Real-time дашборд:</strong> Переписал архитектуру обновления данных
+                    с polling на WebSockets. Задержка отображения статуса нод сократилась
+                    с 30 секунд до мгновенной, нагрузка на сервер упала на 70%.</li>
+                    <li><strong>Мультичейн интеграции:</strong> Разработал 12 адаптеров для
+                    подключения кошельков (MetaMask, Phantom, Keplr и др.). Единый интерфейс
+                    для операций стейкинга/анстейкинга/вывода в 8 сетях.</li>
+                    <li><strong>Backend-оптимизация:</strong> Создал worker-процессы на Node.js
+                    для параллельной обработки 1000+ транзакций. Время синхронизации данных
+                    чейна сократилось с 4 часов до 15 минут.</li>
+                    <li><strong>Необработанные транзакции:</strong> Разработал API для получения
+                    unsigned hash с последующей подписью пользователем — критичный функционал
+                    для стейкинга в Solana, Near, Polkadot, Cardano.</li>
+                </ul>
+                <div class="exp-meta">
+                    <span>React</span>
+                    <span>TypeScript</span>
+                    <span>Redux</span>
+                    <span>Node.js</span>
+                    <span>PostgreSQL</span>
+                    <span>Redis</span>
+                    <span>WebSockets</span>
+                    <span>Server Workers</span>
+                </div>
+            </div>
+
+            <!-- Radiance Team -->
+            <div class="exp-item">
+                <div class="exp-header">
+                    <div class="exp-company">
+                        Radiance Team
+                        <a href="https://radianceteam.com">radianceteam.com</a>
+                    </div>
+                    <div class="exp-period">Март 2020 — Сентябрь 2022 (2 г. 7 мес.)</div>
+                </div>
+                <div class="exp-role">Fullstack Engineer</div>
+                <div class="exp-desc">
+                    Запуск с нуля 4 проектов в блокчейн-экосистеме: DEX-биржа, NFT-маркетплейс,
+                    система аудита голосования, кроссчейн-мост. Работа со смарт-контрактами
+                    Solidity, архитектура fullstack-решений.
+                </div>
+                <ul class="exp-achievements">
+                    <li><strong>Ton Exchange (DEX):</strong> Спроектировал архитектуру DEX-биржи
+                    с нуля. Разработал модуль лимитных ордеров, WebSocket-ядро для real-time
+                    стакана, обработчик событий блокчейна. Объём торгов первый месяц: $2M+.</li>
+                    <li><strong>NFT Marketplace:</strong> Создал маркетплейс для сети NEAR
+                    с генератором NFT из слоёв (учёт редкости), фильтрацией, сортировкой,
+                    поиском через GraphQL. Рефакторинг архитектуры ускорил загрузку коллекций
+                    на 300%.</li>
+                    <li><strong>Система аудита голосования:</strong> Разработал смарт-контракты
+                    на Solidity для проверки бюллетеней независимыми наблюдателями.
+                    Дебот-интерфейс для взаимодействия с блокчейном Everscale.</li>
+                    <li><strong>Кроссчейн-мост Everscale ↔ Tezos:</strong> Смарт-контракты bridge
+                    на Solidity, relay-нода на Node.js для обработки межсетевых транзакций.
+                    Первое место в хакатоне от фонда Tezos.</li>
+                </ul>
+                <div class="exp-meta">
+                    <span>React</span>
+                    <span>Redux</span>
+                    <span>Node.js</span>
+                    <span>Solidity</span>
+                    <span>Web3</span>
+                    <span>MongoDB</span>
+                    <span>GraphQL</span>
+                </div>
+            </div>
+
+            <!-- Exceed Team -->
+            <div class="exp-item">
+                <div class="exp-header">
+                    <div class="exp-company">
+                        Exceed Team
+                        <a href="https://exceed-team.com/ru">exceed-team.com/ru</a>
+                    </div>
+                    <div class="exp-period">Декабрь 2018 — Декабрь 2019 (1 г. 1 мес.)</div>
+                </div>
+                <div class="exp-role">MERN Developer</div>
+                <div class="exp-desc">
+                    Первый серьёзный проект: fullstack-приложение для поиска саундтреков
+                    из фильмов и сериалов с интеграцией Spotify, Amazon Music, Apple Music.
+                </div>
+                <ul class="exp-achievements">
+                    <li><strong>Fullstack с нуля:</strong> Спроектировал архитектуру MERN-приложения:
+                    React-фронтенд, Node.js API, MongoDB, алгоритмы парсинга и очистки данных.</li>
+                    <li><strong>Автоматизация контента:</strong> Разработал cron-задачи для
+                    парсинга саундтреков, очистки дубликатов, генерации аффилиат-ссылок.
+                    База выросла с 0 до 50 000+ треков за 6 месяцев.</li>
+                    <li><strong>Рекламная система:</strong> Создал админ-панель для управления
+                    баннерами с динамической загрузкой на фронтенд без редеплоя.</li>
+                </ul>
+                <div class="exp-meta">
+                    <span>MERN Stack</span>
+                    <span>React</span>
+                    <span>Node.js</span>
+                    <span>MongoDB</span>
+                    <span>Cron</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- TEACHING -->
+        <div class="section">
+            <h2 class="section-title">Преподавание и менторство</h2>
+            <div class="teaching-block">
+                <h4>🎓 Otus — Преподаватель (Октябрь 2024 — Июнь 2025)</h4>
+                <p>
+                    <strong>3 курса, 200+ студентов:</strong> ReactJS Advanced, Node.js Professional,
+                    JavaScript Basic & Advanced. Провожу код-ревью, разбираю архитектурные решения,
+                    готовлю студентов к production-разработке. 85% выпускников трудоустроились
+                    в течение 3 месяцев.
+                </p>
+            </div>
+        </div>
+
+        <!-- SKILLS -->
+        <div class="section">
+            <h2 class="section-title">Ключевые компетенции</h2>
+            <div class="skills-grid">
+                <div class="skill-category">Frontend</div>
+                <div class="skill-list">
+                    <span class="skill-tag">React</span>
+                    <span class="skill-tag">TypeScript</span>
+                    <span class="skill-tag">Redux / MobX</span>
+                    <span class="skill-tag">Redux-Saga</span>
+                    <span class="skill-tag">Webpack</span>
+                    <span class="skill-tag">Material UI</span>
+                    <span class="skill-tag">Styled Components</span>
+                    <span class="skill-tag">HTML5 / CSS3</span>
+                    <span class="skill-tag">Jest / Unit Testing</span>
+                </div>
+
+                <div class="skill-category">Backend</div>
+                <div class="skill-list">
+                    <span class="skill-tag">Node.js</span>
+                    <span class="skill-tag">NestJS</span>
+                    <span class="skill-tag">Express</span>
+                    <span class="skill-tag">REST API</span>
+                    <span class="skill-tag">WebSockets</span>
+                    <span class="skill-tag">Server Workers</span>
+                </div>
+
+                <div class="skill-category">База данных</div>
+                <div class="skill-list">
+                    <span class="skill-tag">PostgreSQL</span>
+                    <span class="skill-tag">MongoDB</span>
+                    <span class="skill-tag">Redis</span>
+                </div>
+
+                <div class="skill-category">Блокчейн</div>
+                <div class="skill-list">
+                    <span class="skill-tag">Solidity</span>
+                    <span class="skill-tag">Smart Contracts</span>
+                    <span class="skill-tag">Web3 / Ethers.js</span>
+                    <span class="skill-tag">DeFi</span>
+                    <span class="skill-tag">EVM / NEAR / Solana</span>
+                </div>
+
+                <div class="skill-category">Инфраструктура</div>
+                <div class="skill-list">
+                    <span class="skill-tag">Docker</span>
+                    <span class="skill-tag">Git</span>
+                    <span class="skill-tag">n8n</span>
+                    <span class="skill-tag">Notion</span>
+                </div>
+
+                <div class="skill-category">Архитектура</div>
+                <div class="skill-list">
+                    <span class="skill-tag">System Design</span>
+                    <span class="skill-tag">DDD</span>
+                    <span class="skill-tag">FSD (Feature-Sliced Design)</span>
+                    <span class="skill-tag">Микросервисы</span>
+                    <span class="skill-tag">Микрофронтенды</span>
+                    <span class="skill-tag">Low-code платформы</span>
+                </div>
+
+                <div class="skill-category">Soft skills</div>
+                <div class="skill-list">
+                    <span class="skill-tag">Управление проектами</span>
+                    <span class="skill-tag">Менторство</span>
+                    <span class="skill-tag">Преподавание</span>
+                    <span class="skill-tag">Английский B2</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- EDUCATION -->
+        <div class="section">
+            <h2 class="section-title">Образование и развитие</h2>
+
+            <div class="edu-item">
+                <div class="edu-header">
+                    <div class="edu-school">Южный федеральный университет, Ростов-на-Дону</div>
+                    <div class="edu-year">2011</div>
+                </div>
+                <div class="edu-detail">Высшее образование — Экономика, ВЭД</div>
+            </div>
+
+            <div style="margin-top: 15px; font-size: 14px; color: #4a5568; line-height: 1.7;">
+                <strong>Непрерывное обучение:</strong> Coursera (алгоритмы, системный дизайн),
+                ШРИ (Яндекс), UTBITV, МиниИн (алгоритмы и структуры данных).
+                Ежедневная практика на LeetCode, изучение новых стеков и подходов.
+            </div>
+
+            <div style="margin-top: 12px; font-size: 14px; color: #4a5568; line-height: 1.7;">
+                <strong>Нейросети и AI-инструменты:</strong> GigaCode CLI, Cursor и другие AI-ассистенты
+                для ускорения разработки, ревью кода и повседневных инженерных задач. Умею создавать пайплайны.
+            </div>
+
+            <div style="margin-top: 12px; font-size: 14px; color: #4a5568; line-height: 1.7;">
+                <strong>Автоматизация:</strong> n8n, Make — построение workflow и интеграций
+                для рутинных процессов и связки сервисов без лишнего ручного труда.
+            </div>
+        </div>
+
+        <!-- LANGUAGES -->
+        <div class="section">
+            <h2 class="section-title">Языки</h2>
+            <div class="lang-item">
+                <div class="lang-name">Русский</div>
+                <div class="lang-level">Родной</div>
+            </div>
+            <div class="lang-item">
+                <div class="lang-name">Английский</div>
+                <div class="lang-level">B2 — Средне-продвинутый (техническая документация, переписка, созвоны)</div>
+            </div>
+        </div>
+
+        <!-- ABOUT -->
+        <div class="section">
+            <h2 class="section-title">Обо мне</h2>
+            <div class="about-text">
+                <p>
+                    <strong>Архитектор, а не кодер.</strong> Проектирую системы, которые масштабируются
+                    и живут долго. Практикую DDD, FSD, микрофронтенды — подходы, которые позволяют
+                    командам работать независимо и не ломать друг другу код.
+                </p>
+                <p>
+                    <strong>Автоматизирую всё, что повторяется.</strong> Собственные инструменты на n8n
+                    для генерации документации из изображений, интеграции с 1С, рутинных задач.
+                    Верю, что инженер должен тратить время на решение новых проблем, а не на copy-paste.
+                </p>
+                <p>
+                    <strong>Непрерывно расту.</strong> Алгоритмы, системный дизайн, новые стеки —
+                    изучаю ежедневно. Прохожу курс по AWS DevOps. Пишу приложения на Swift.
+                    2 года преподавания в Otus научили объяснять сложное просто
+                    и видеть пробелы в знаниях, которые сам бы не заметил.
+                </p>
+                <p>
+                    <strong>Готов к ответственности.</strong> Ищу позицию, где можно влиять на
+                    продуктовые решения, а не просто закрывать тикеты. Не токсичен, ценю людей
+                    и здоровую командную культуру.
+                </p>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer-info">
+            <span>🚗 Собственный автомобиль</span>
+            <span>🪪 Права категории B</span>
+            <span>📅 Резюме обновлено: Июль 2026</span>
+        </div>
+
+    </div>
+</body>
+</html>
